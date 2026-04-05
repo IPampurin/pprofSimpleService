@@ -35,8 +35,10 @@ func main() {
 
 	// запускаем сервер
 	if err := srv.Run(ctx); err != nil {
-		log.Printf("сервер остановлен: %v", err)
+		log.Printf("сервер остановлен с ошибкой: %v", err)
 	}
+
+	log.Println("Приложение корректно остановлено.")
 }
 
 // signalHandler слушает SIGINT/SIGTERM и отменяет контекст

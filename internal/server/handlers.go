@@ -17,11 +17,16 @@ func (h *handler) Sum(c *gin.Context) {
 
 	var req SumRequest
 	if err := c.ShouldBindQuery(&req); err != nil {
-		c.JSON(http.StatusBadRequest, ErrorResponse{Error: "параметры a и b обязательны и должны быть целыми числами"})
+		c.JSON(http.StatusBadRequest, ErrorResponse{Error: "неверные параметры"})
 		return
 	}
 
-	result := h.svc.Sum(req.A, req.B)
+	if req.A == nil || req.B == nil {
+		c.JSON(http.StatusBadRequest, ErrorResponse{Error: "параметры a и b обязательны"})
+		return
+	}
+
+	result := h.svc.Sum(*req.A, *req.B)
 
 	c.JSON(http.StatusOK, SuccessResponse{Result: result})
 }
