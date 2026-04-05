@@ -3,17 +3,11 @@ package configuration
 import (
 	"fmt"
 	"os"
-	"strconv"
 	"time"
 )
 
-// Config - корневой набор настроек для HTTP, БД и поведения календаря
+// Config - порт и таймауты HTTP-сервера
 type Config struct {
-	HTTP HTTPConfig
-}
-
-// HTTPConfig - порт и таймауты HTTP-сервера
-type HTTPConfig struct {
 	Host            string        // хост HTTP-сервера
 	Port            string        // порт HTTP-сервера
 	ReadTimeout     time.Duration // таймаут чтения тела запроса
@@ -27,14 +21,12 @@ func Load() (Config, error) {
 
 	// подставляем дефолты
 	cfg := Config{
-		HTTP: HTTPConfig{
-			Host:            getEnv("HTTP_HOST", "0.0.0.0"),
-			Port:            getEnv("HTTP_PORT", "8081"),
-			ReadTimeout:     getDuration("HTTP_READ_TIMEOUT", 15*time.Second),
-			WriteTimeout:    getDuration("HTTP_WRITE_TIMEOUT", 15*time.Second),
-			IdleTimeout:     getDuration("HTTP_IDLE_TIMEOUT", 60*time.Second),
-			ShutdownTimeout: getDuration("HTTP_SHUTDOWN_TIMEOUT", 30*time.Second),
-		},
+		Host:            getEnv("HTTP_HOST", "0.0.0.0"),
+		Port:            getEnv("HTTP_PORT", "8081"),
+		ReadTimeout:     getDuration("HTTP_READ_TIMEOUT", 15*time.Second),
+		WriteTimeout:    getDuration("HTTP_WRITE_TIMEOUT", 15*time.Second),
+		IdleTimeout:     getDuration("HTTP_IDLE_TIMEOUT", 60*time.Second),
+		ShutdownTimeout: getDuration("HTTP_SHUTDOWN_TIMEOUT", 30*time.Second),
 	}
 
 	if err := cfg.Validate(); err != nil {
@@ -47,10 +39,10 @@ func Load() (Config, error) {
 // Validate - проверка инвариантов после Load
 func (c *Config) Validate() error {
 
-	if c.HTTP.Host == "" {
+	if c.Host == "" {
 		return fmt.Errorf("configuration: не задан хост сервера (HTTP_HOST)")
 	}
-	if c.HTTP.Port == "" {
+	if c.Port == "" {
 		return fmt.Errorf("configuration: не задан порт сервера (HTTP_PORT)")
 	}
 
@@ -65,22 +57,6 @@ func getEnv(key, def string) string {
 	}
 
 	return def
-}
-
-// getInt получает переменную окружения в виде числа
-func getInt(key string, def int) int {
-
-	s := os.Getenv(key)
-	if s == "" {
-		return def
-	}
-
-	n, err := strconv.Atoi(s)
-	if err != nil {
-		return def
-	}
-
-	return n
 }
 
 // getDuration получает переменную окружения в виде продолжительности
