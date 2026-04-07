@@ -7,6 +7,7 @@ services:
     container_name: pprofSimple
     ports:
       - ${HTTP_PORT}:${HTTP_PORT}
+      - 6060:6060
     env_file:
       - .env
     networks:
