@@ -98,6 +98,40 @@ docker compose down
     HTTP_IDLE_TIMEOUT=60s        # keep-alive
     HTTP_SHUTDOWN_TIMEOUT=30s    # таймаут graceful shutdown
 
+### 🔬 Профилирование и оптимизация  
+
+1. Запуск бенчмарков (baseline)  
+
+Бенчмарки изолированно тестируют бизнес-функции, минуя HTTP-слой.  
+
+```bash
+# запуск всех бенчмарков с замером аллокаций, 5 прогонов
+go test -bench=. -benchmem -count=5 ./internal/service/ > old.txt
+```
+
+
+
+### 📊 Результаты  
+
+goos: windows
+goarch: amd64
+pkg: github.com/IPampurin/pprofSimpleService/internal/service
+cpu: Intel(R) Core(TM) i5-4570 CPU @ 3.20GHz
+
++------------------------+--------------+-----------------+----------+--------------+--------------+
+| Бенчмарк               | old ns/op    | new ns/op       | delta    | old allocs   | new allocs   |
++----------------------- +--------------+-----------------+----------+--------------+--------------+
+| BenchmarkSum           |       0.4670 |                 |          | 0            |              |
+| BenchmarkFibN20        |       39_354 |                 |          | 0            |              |
+| BenchmarkFibN30        |    4_767_905 |                 |          | 0            |              |
+| BenchmarkFibN40        |  591_274_750 |                 |          | 0            |              |
+| BenchmarkAllocate1MB   |       76_121 |                 |          | 1            |              |
+| BenchmarkAllocate10MB  |      639_238 |                 |          | 1            |              |
+| BenchmarkAllocate100MB |    5_462_681 |                 |          | 1            |              |
++------------------------+--------------+-----------------+----------+--------------+--------------+
+
+
+
 ### 📦 Зависимости  
 
 **Gin** - HTTP-роутер.  
