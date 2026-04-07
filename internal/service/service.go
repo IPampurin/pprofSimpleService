@@ -17,7 +17,7 @@ func (s *Service) Sum(a, b int64) int64 {
 	return a + b
 }
 
-// Fib реализует рекурсивное вычисление чисел Фибоначчи (для n == 0 возвращает 0)
+// Fib реализует итеративное вычисление чисел Фибоначчи (для n == 0 возвращает 0)
 func (s *Service) Fib(n int) int64 {
 
 	if n <= 0 {
@@ -27,7 +27,12 @@ func (s *Service) Fib(n int) int64 {
 		return 1
 	}
 
-	return s.Fib(n-1) + s.Fib(n-2)
+	var a, b int64 = 0, 1
+	for i := 2; i <= n; i++ {
+		a, b = b, a+b
+	}
+
+	return b
 }
 
 // Allocate выделяет память и сразу освобождает
