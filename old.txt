@@ -2,40 +2,40 @@ goos: windows
 goarch: amd64
 pkg: github.com/IPampurin/pprofSimpleService/internal/service
 cpu: Intel(R) Core(TM) i5-4570 CPU @ 3.20GHz
-BenchmarkSum-4             	1000000000	         0.5909 ns/op	       0 B/op	       0 allocs/op
-BenchmarkSum-4             	1000000000	         0.5123 ns/op	       0 B/op	       0 allocs/op
-BenchmarkSum-4             	1000000000	         0.4670 ns/op	       0 B/op	       0 allocs/op
-BenchmarkSum-4             	1000000000	         0.4554 ns/op	       0 B/op	       0 allocs/op
-BenchmarkSum-4             	1000000000	         0.4339 ns/op	       0 B/op	       0 allocs/op
-BenchmarkFibN20-4          	   25622	     41023 ns/op	       0 B/op	       0 allocs/op
-BenchmarkFibN20-4          	   29493	     38876 ns/op	       0 B/op	       0 allocs/op
-BenchmarkFibN20-4          	   31102	     39522 ns/op	       0 B/op	       0 allocs/op
-BenchmarkFibN20-4          	   28615	     39354 ns/op	       0 B/op	       0 allocs/op
-BenchmarkFibN20-4          	   30944	     38809 ns/op	       0 B/op	       0 allocs/op
-BenchmarkFibN30-4          	     253	   4757438 ns/op	       0 B/op	       0 allocs/op
-BenchmarkFibN30-4          	     247	   4892987 ns/op	       0 B/op	       0 allocs/op
-BenchmarkFibN30-4          	     252	   4767905 ns/op	       0 B/op	       0 allocs/op
-BenchmarkFibN30-4          	     253	   4756594 ns/op	       0 B/op	       0 allocs/op
-BenchmarkFibN30-4          	     248	   4892056 ns/op	       0 B/op	       0 allocs/op
-BenchmarkFibN40-4          	       2	 586334800 ns/op	       0 B/op	       0 allocs/op
-BenchmarkFibN40-4          	       2	 584780350 ns/op	       0 B/op	       0 allocs/op
-BenchmarkFibN40-4          	       2	 591274750 ns/op	       0 B/op	       0 allocs/op
-BenchmarkFibN40-4          	       2	 599385000 ns/op	       0 B/op	       0 allocs/op
-BenchmarkFibN40-4          	       2	 862670300 ns/op	       0 B/op	       0 allocs/op
-BenchmarkAllocate1MB-4     	   15175	     72428 ns/op	 1048576 B/op	       1 allocs/op
-BenchmarkAllocate1MB-4     	   15962	     72796 ns/op	 1048576 B/op	       1 allocs/op
-BenchmarkAllocate1MB-4     	   16423	     79830 ns/op	 1048576 B/op	       1 allocs/op
-BenchmarkAllocate1MB-4     	   16069	     76121 ns/op	 1048576 B/op	       1 allocs/op
-BenchmarkAllocate1MB-4     	   15471	     78378 ns/op	 1048576 B/op	       1 allocs/op
-BenchmarkAllocate10MB-4    	    1732	    715040 ns/op	10485760 B/op	       1 allocs/op
-BenchmarkAllocate10MB-4    	    1729	    639238 ns/op	10485760 B/op	       1 allocs/op
-BenchmarkAllocate10MB-4    	    1960	    623954 ns/op	10485760 B/op	       1 allocs/op
-BenchmarkAllocate10MB-4    	    1766	    630981 ns/op	10485760 B/op	       1 allocs/op
-BenchmarkAllocate10MB-4    	    1845	    784493 ns/op	10485761 B/op	       1 allocs/op
-BenchmarkAllocate100MB-4   	     180	   5770528 ns/op	104857600 B/op	       1 allocs/op
-BenchmarkAllocate100MB-4   	     195	   5741414 ns/op	104857600 B/op	       1 allocs/op
-BenchmarkAllocate100MB-4   	     223	   5462681 ns/op	104857601 B/op	       1 allocs/op
-BenchmarkAllocate100MB-4   	     232	   5142351 ns/op	104857600 B/op	       1 allocs/op
-BenchmarkAllocate100MB-4   	     220	   5122528 ns/op	104857601 B/op	       1 allocs/op
+BenchmarkSum-4             	1000000000	         0.3397 ns/op	       0 B/op	       0 allocs/op
+BenchmarkSum-4             	1000000000	         0.3431 ns/op	       0 B/op	       0 allocs/op
+BenchmarkSum-4             	1000000000	         0.3722 ns/op	       0 B/op	       0 allocs/op
+BenchmarkSum-4             	1000000000	         0.3537 ns/op	       0 B/op	       0 allocs/op
+BenchmarkSum-4             	1000000000	         0.3271 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFibN20-4          	   30538	     39324 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFibN20-4          	   31034	     39754 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFibN20-4          	   29457	     39308 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFibN20-4          	   30452	     39044 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFibN20-4          	   30999	     39094 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFibN30-4          	     250	   4869953 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFibN30-4          	     250	   4953914 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFibN30-4          	     252	   4764669 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFibN30-4          	     246	   4791271 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFibN30-4          	     248	   4909540 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFibN40-4          	       2	 597406250 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFibN40-4          	       2	 613936150 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFibN40-4          	       2	 672493400 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFibN40-4          	       2	 631734200 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFibN40-4          	       2	 603704250 ns/op	       0 B/op	       0 allocs/op
+BenchmarkAllocate1MB-4     	   14016	     76796 ns/op	 1048576 B/op	       1 allocs/op
+BenchmarkAllocate1MB-4     	   15117	     75908 ns/op	 1048576 B/op	       1 allocs/op
+BenchmarkAllocate1MB-4     	   16108	     78521 ns/op	 1048576 B/op	       1 allocs/op
+BenchmarkAllocate1MB-4     	   10000	    102283 ns/op	 1048576 B/op	       1 allocs/op
+BenchmarkAllocate1MB-4     	   10000	    100102 ns/op	 1048576 B/op	       1 allocs/op
+BenchmarkAllocate10MB-4    	    1468	    687271 ns/op	10485760 B/op	       1 allocs/op
+BenchmarkAllocate10MB-4    	    1942	    603653 ns/op	10485760 B/op	       1 allocs/op
+BenchmarkAllocate10MB-4    	    2050	    638399 ns/op	10485760 B/op	       1 allocs/op
+BenchmarkAllocate10MB-4    	    2113	    721403 ns/op	10485760 B/op	       1 allocs/op
+BenchmarkAllocate10MB-4    	    1784	    627882 ns/op	10485760 B/op	       1 allocs/op
+BenchmarkAllocate100MB-4   	     193	   6290264 ns/op	104857600 B/op	       1 allocs/op
+BenchmarkAllocate100MB-4   	     212	   6258725 ns/op	104857600 B/op	       1 allocs/op
+BenchmarkAllocate100MB-4   	     176	   6120512 ns/op	104857600 B/op	       1 allocs/op
+BenchmarkAllocate100MB-4   	     200	   5947714 ns/op	104857600 B/op	       1 allocs/op
+BenchmarkAllocate100MB-4   	     228	   6072878 ns/op	104857600 B/op	       1 allocs/op
 PASS
-ok  	github.com/IPampurin/pprofSimpleService/internal/service	55.790s
+ok  	github.com/IPampurin/pprofSimpleService/internal/service	52.371s

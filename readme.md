@@ -132,6 +132,47 @@ go test -bench=BenchmarkFibN40 -trace=trace.out ./internal/service/
 go tool trace trace.out
 ```
 
+3. Оптимизация  
+
+Исходная (медленная) реализация Fib:  
+
+    func (s *Service) Fib(n int) int64 {
+        if n <= 0 { return 0 }
+        if n == 1 { return 1 }
+        return s.Fib(n-1) + s.Fib(n-2)
+    }
+
+Оптимизированная (итеративная) реализация:  
+
+    func (s *Service) Fib(n int) int64 {
+        if n <= 0 { return 0 }
+        if n == 1 { return 1 }
+        var a, b int64 = 0, 1
+        for i := 2; i <= n; i++ {
+            a, b = b, a+b
+        }
+        return b
+    }
+
+4. Повторные замеры и сравнение  
+
+После замены кода повторяем бенчмарки:  
+
+```bash
+go test -bench=. -benchmem -count=5 ./internal/service/ > new.txt
+```
+
+Устанавливаем benchstat (если нет):   
+
+```bash
+go install golang.org/x/perf/cmd/benchstat@latest
+```
+
+Сравниваем результаты:  
+
+```bash
+benchstat old.txt new.txt
+```
 
 ### 📊 Результаты  
 
@@ -140,17 +181,17 @@ goarch: amd64
 pkg: github.com/IPampurin/pprofSimpleService/internal/service
 cpu: Intel(R) Core(TM) i5-4570 CPU @ 3.20GHz
 
-+------------------------+--------------+-----------------+----------+--------------+--------------+
-| Бенчмарк               | old ns/op    | new ns/op       | delta    | old allocs   | new allocs   |
-+----------------------- +--------------+-----------------+----------+--------------+--------------+
-| BenchmarkSum           |       0.4670 |                 |          | 0            |              |
-| BenchmarkFibN20        |       39_354 |                 |          | 0            |              |
-| BenchmarkFibN30        |    4_767_905 |                 |          | 0            |              |
-| BenchmarkFibN40        |  591_274_750 |                 |          | 0            |              |
-| BenchmarkAllocate1MB   |       76_121 |                 |          | 1            |              |
-| BenchmarkAllocate10MB  |      639_238 |                 |          | 1            |              |
-| BenchmarkAllocate100MB |    5_462_681 |                 |          | 1            |              |
-+------------------------+--------------+-----------------+----------+--------------+--------------+
++------------------------+--------------+------------+--------------+------------+------------+
+| Бенчмарк               | old ns/op    | new ns/op  | delta        | old allocs | new allocs |
++----------------------- +--------------+------------+--------------+------------+------------+
+| BenchmarkSum           |       0.3431 |     0.3343 |    **-2.6%** |  0         |  0         |
+| BenchmarkFibN20        |       39_308 |      9.633 |  **-100.0%** |  0         |  0         |
+| BenchmarkFibN30        |    4_869_953 |      14.52 |  **-100.0%** |  0         |  0         |
+| BenchmarkFibN40        |  613_936_150 |      14.41 |  **-100.0%** |  0         |  0         |
+| BenchmarkAllocate1MB   |       78_521 |     76_108 |    **-3.1%** |  1         |  1         |
+| BenchmarkAllocate10MB  |      638_399 |    850_193 |   **+33.2%** |  1         |  1         |
+| BenchmarkAllocate100MB |    6_120_512 |  5_940_639 |    **-2.9%** |  1         |  1         |
++------------------------+--------------+------------+--------------+------------+------------+
 
 
 
