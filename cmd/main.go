@@ -3,9 +3,12 @@ package main
 import (
 	"context"
 	"log"
+	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
+
+	_ "net/http/pprof" // неявно регистрирует /debug/pprof/ на http.DefaultServeMux
 
 	"github.com/IPampurin/pprofSimpleService/internal/configuration"
 	"github.com/IPampurin/pprofSimpleService/internal/server"
@@ -32,6 +35,14 @@ func main() {
 
 	// получаем сервер
 	srv := server.NewServer(&cfg, svc)
+
+	// запускаем pprof-сервер в отдельной горутине
+	go func() {
+		log.Println("pprof-сервер запущен на порту :6060")
+		if err := http.ListenAndServe(":6060", nil); err != nil {
+			log.Printf("ошибка pprof-сервера: %v", err)
+		}
+	}()
 
 	// запускаем сервер
 	if err := srv.Run(ctx); err != nil {
