@@ -109,6 +109,28 @@ docker compose down
 go test -bench=. -benchmem -count=5 ./internal/service/ > old.txt
 ```
 
+2. Снятие профилей до оптимизации  
+
+CPU-профиль (для Fib):  
+
+```bash
+go test -bench=BenchmarkFibN40 -cpuprofile=cpu.out ./internal/service/
+go tool pprof -http=:8080 cpu.out
+```
+
+Профиль памяти (для Allocate):  
+
+```bash
+go test -bench=BenchmarkAllocate10MB -memprofile=mem.out ./internal/service/
+go tool pprof -http=:8080 mem.out
+```
+
+Трассировка выполнения:  
+
+```bash
+go test -bench=BenchmarkFibN40 -trace=trace.out ./internal/service/
+go tool trace trace.out
+```
 
 
 ### 📊 Результаты  
