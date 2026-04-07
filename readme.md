@@ -42,19 +42,41 @@
 ### 🗂️ Структура проекта  
 
 ```bash
+.
 ├── cmd/
-│   └── main.go                 # точка входа, запуск HTTP + pprof серверов
+│   └── main.go                     # точка входа, запуск HTTP + pprof серверов
 ├── internal/
-│   ├── configuration/          # загрузка .env, парсинг таймаутов
-│   ├── interfaces/             # контракт бизнес-логики (ServiceMethods)
-│   ├── server/                 # Gin-сервер, хендлеры, DTO
-│   └── service/                # реализация бизнес-логики (Sum, Fib, Allocate)
-├── web/                        # статические файлы (index.html, style.css, script.js)
-├── .env                        # переменные окружения
-├── compose.yml                 # запуск сервиса в Docker
-├── Dockerfile                  # multi-stage сборка
-├── go.mod, go.sum              # зависимости
-└── readme.md                   # этот файл
+│   ├── configuration/
+│   │   └── config.go               # загрузка .env, парсинг таймаутов
+│   ├── interfaces/
+│   │   └── interface.go            # контракт бизнес-логики (ServiceMethods)
+│   ├── server/
+│   │   ├── dto.go                  # DTO для запросов/ответов
+│   │   ├── handlers.go             # HTTP-обработчики (Sum, Fib, Allocate)
+│   │   └── server.go               # настройка и запуск HTTP-сервера
+│   └── service/
+│       ├── service.go              # реализация бизнес-логики (Sum, Fib, Allocate)
+│       └── service_test.go         # бенчмарки (BenchmarkSum, Fib, Allocate)
+├── web/
+│   ├── index.html                  # веб-интерфейс для ручного тестирования
+│   ├── script.js                   # клиентская логика (fetch API)
+│   └── style.css                   # стили
+├── .env                            # переменные окружения (порт, таймауты)
+├── compose.yml                     # Docker Compose (сервис + проброс портов)
+├── Dockerfile                      # multi-stage сборка образа
+├── go.mod                          # зависимости Go
+├── go.sum                          # контрольные суммы зависимостей
+├── readme.md                       # текущий файл
+│
+# Артефакты бенчмарков и профилирования (генерируются при запуске команд)
+├── old.txt                         # результаты бенчмарков до оптимизации
+├── new.txt                         # результаты бенчмарков после оптимизации
+├── cpu_before.out                  # CPU-профиль до оптимизации
+├── cpu_after.out                   # CPU-профиль после оптимизации
+├── mem_before.out                  # memory-профиль до оптимизации
+├── trace_before.out                # трассировка до оптимизации
+├── trace.out                       # трассировка (общая или после)
+└── service.test.exe*               # исполняемый файл тестов (Windows)
 ```
 
 ### 🚀 Быстрый старт  
